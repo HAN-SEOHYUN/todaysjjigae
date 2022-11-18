@@ -12,6 +12,9 @@ class JjigaeServiceImpl(
 ) : JjigaeService {
     override fun createJjigae(jjigaeDTO: JjigaeDTO): JjigaeDTO {
 
+        if(jjigaeDTO.id != -1)
+            throw IllegalArgumentException("Id must be null")
+
         val movie = jjigaeRepository.save(jjigaeMapper.toEntity(jjigaeDTO))
         return jjigaeMapper.fromEntity(movie)
     }
