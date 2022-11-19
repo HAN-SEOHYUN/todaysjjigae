@@ -15,7 +15,7 @@ class JjigaeServiceImpl(
     //찌개 추가하기
     override fun createJjigae(jjigaeDTO: JjigaeDTO): JjigaeDTO {
 
-        if(jjigaeDTO.id != -1) //auto_increment 인 id가 수동으로 입력될 경우
+        if(jjigaeDTO.id != -1)
             throw IllegalArgumentException("Id must be null")
 
         val movie = jjigaeRepository.save(jjigaeMapper.toEntity(jjigaeDTO))
@@ -40,5 +40,17 @@ class JjigaeServiceImpl(
         return jjigaeMapper.fromEntity(jjigae)
     }
 
+    override fun updateJjigae(jjigaeDTO: JjigaeDTO): JjigaeDTO {
+        val exists = jjigaeRepository.existsById(jjigaeDTO.id)
+        val default = "Default value"
 
+        if(!exists)
+            throw JjigaeException("Jjigae with id ${jjigaeDTO.id} id not present")
+
+        if(jjigaeDTO.preference == 0.0 || jjigaeDTO.imgPath ==default || jjigaeDTO.name ==default || jjigaeDTO.description ==default)
+            throw JjigaeException("Complete JJIGAE object")
+
+        jjigaeRepository.save(jjigaeMapper.toEntity(jjigaeDTO))
+        return jjigaeDTO
+    }
 }

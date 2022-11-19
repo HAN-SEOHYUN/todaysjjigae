@@ -6,5 +6,6 @@ interface JjigaeService {
     fun createJjigae(jjigaeDTO: JjigaeDTO) : JjigaeDTO
     fun getJjigaes(): List<JjigaeDTO>
     fun getJjigae(id:Int) : JjigaeDTO
+    fun updateJjigae(jjigaeDTO: JjigaeDTO) : JjigaeDTO
 
 }
