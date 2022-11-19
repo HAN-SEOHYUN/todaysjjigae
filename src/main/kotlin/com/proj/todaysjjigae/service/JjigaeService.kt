@@ -7,5 +7,5 @@ interface JjigaeService {
     fun getJjigaes(): List<JjigaeDTO>
     fun getJjigae(id:Int) : JjigaeDTO
     fun updateJjigae(jjigaeDTO: JjigaeDTO) : JjigaeDTO
-
+    fun deleteJjigae(id:Int)
 }

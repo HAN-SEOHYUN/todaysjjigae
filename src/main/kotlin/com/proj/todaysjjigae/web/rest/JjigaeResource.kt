@@ -4,6 +4,7 @@ import com.proj.todaysjjigae.dto.JjigaeDTO
 import com.proj.todaysjjigae.service.JjigaeService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -35,4 +36,7 @@ class JjigaeResource(
         return jjigaeService.updateJjigae(jjigaeDTO)
     }
 
+    @DeleteMapping("/{id}/")
+    fun deleteJjigae(@PathVariable id:Int) =
+        ResponseEntity(jjigaeService.deleteJjigae(id), HttpStatus.NO_CONTENT)
 }

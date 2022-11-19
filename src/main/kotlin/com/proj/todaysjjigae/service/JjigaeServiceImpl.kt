@@ -39,7 +39,7 @@ class JjigaeServiceImpl(
         val jjigae = optionalJjigae.orElseThrow{JjigaeException("Jjigae with id $id is not present")}
         return jjigaeMapper.fromEntity(jjigae)
     }
-
+    //찌개 정보 업데이트
     override fun updateJjigae(jjigaeDTO: JjigaeDTO): JjigaeDTO {
         val exists = jjigaeRepository.existsById(jjigaeDTO.id)
         val default = "Default value"
@@ -52,5 +52,12 @@ class JjigaeServiceImpl(
 
         jjigaeRepository.save(jjigaeMapper.toEntity(jjigaeDTO))
         return jjigaeDTO
+    }
+    //찌개 정보 삭제
+    override fun deleteJjigae(id: Int) {
+        val exists = jjigaeRepository.existsById(id)
+        if(!exists)
+            throw JjigaeException("Jjigae with id $id is not present")
+        jjigaeRepository.deleteById(id)
     }
 }
