@@ -12,16 +12,17 @@ class JjigaeServiceImpl(
     private val jjigaeMapper: JjigaeMapper
 ) : JjigaeService {
 
+    //찌개 추가하기
     override fun createJjigae(jjigaeDTO: JjigaeDTO): JjigaeDTO {
 
-        if(jjigaeDTO.id != -1)
+        if(jjigaeDTO.id != -1) //auto_increment 인 id가 수동으로 입력될 경우
             throw IllegalArgumentException("Id must be null")
 
         val movie = jjigaeRepository.save(jjigaeMapper.toEntity(jjigaeDTO))
         return jjigaeMapper.fromEntity(movie)
     }
-
-    override fun getMovies(): List<JjigaeDTO> {
+    //모든 찌개 리스트 가져오기
+    override fun getJjigaes(): List<JjigaeDTO> {
         val jjigae = jjigaeRepository.getAllJjigae()
 
         if(jjigae.isEmpty())
@@ -32,4 +33,12 @@ class JjigaeServiceImpl(
             jjigaeMapper.fromEntity(it)
         }
     }
+    //지정 찌개정보 가져오기
+    override fun getJjigae(id: Int): JjigaeDTO {
+        val optionalJjigae = jjigaeRepository.findById(id)
+        val jjigae = optionalJjigae.orElseThrow{JjigaeException("Jjigae with id $id is not present")}
+        return jjigaeMapper.fromEntity(jjigae)
+    }
+
+
 }
