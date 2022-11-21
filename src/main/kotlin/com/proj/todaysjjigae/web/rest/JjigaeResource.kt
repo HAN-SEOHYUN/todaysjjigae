@@ -11,32 +11,39 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.servlet.ModelAndView
 
 @RestController
+@RequestMapping("/api")
 class JjigaeResource(
     private val jjigaeService: JjigaeService
 ) {
+    @GetMapping
+    fun index(): String{
+        return "index"
+    }
 
-    @PostMapping
+    @PostMapping("/jjigae")
     fun createJjigae(@RequestBody jjigaeDTO: JjigaeDTO) : JjigaeDTO{
         return jjigaeService.createJjigae(jjigaeDTO)
     }
 
-    @GetMapping
+    @GetMapping("/jjigaes")
     fun getJjigaes(): ResponseEntity<List<JjigaeDTO>> =
         ResponseEntity.ok(jjigaeService.getJjigaes())
 
-    @GetMapping("/{id}/")
+    @GetMapping("/jjigae/{id}/")
     fun getJjigae(@PathVariable id:Int) =
         ResponseEntity.ok(jjigaeService.getJjigae(id))
 
-    @PutMapping
+    @PutMapping("/jjigae")
     fun updateJjigae(@RequestBody jjigaeDTO: JjigaeDTO) : JjigaeDTO{
         return jjigaeService.updateJjigae(jjigaeDTO)
     }
 
-    @DeleteMapping("/{id}/")
+    @DeleteMapping("/jjigae/{id}/")
     fun deleteJjigae(@PathVariable id:Int) =
         ResponseEntity(jjigaeService.deleteJjigae(id), HttpStatus.NO_CONTENT)
 }

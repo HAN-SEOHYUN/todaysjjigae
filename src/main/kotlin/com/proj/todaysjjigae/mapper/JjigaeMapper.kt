@@ -10,16 +10,16 @@ class JjigaeMapper : Mapper<JjigaeDTO, Jjigae> {
     override fun fromEntity(entity: Jjigae): JjigaeDTO = JjigaeDTO(
         entity.id,
         entity.name,
-        entity.description,
         entity.imgPath,
+        entity.description,
         entity.preference
     )
 
     override fun toEntity(domain: JjigaeDTO): Jjigae = Jjigae(
         domain.id,
         domain.name,
-        domain.description,
         domain.imgPath,
+        domain.description,
         domain.preference
     )
 }
