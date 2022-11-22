@@ -8,4 +8,5 @@ interface JjigaeService {
     fun getJjigae(id:Int) : JjigaeDTO
     fun updateJjigae(jjigaeDTO: JjigaeDTO) : JjigaeDTO
     fun deleteJjigae(id:Int)
+    fun getRandomJjigae() : JjigaeDTO
 }

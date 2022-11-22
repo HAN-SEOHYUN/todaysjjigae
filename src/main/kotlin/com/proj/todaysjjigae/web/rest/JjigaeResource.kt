@@ -20,30 +20,30 @@ import org.springframework.web.servlet.ModelAndView
 class JjigaeResource(
     private val jjigaeService: JjigaeService
 ) {
-    @GetMapping
-    fun index(): String{
-        return "index"
-    }
-
+    //등록
     @PostMapping("/jjigae")
     fun createJjigae(@RequestBody jjigaeDTO: JjigaeDTO) : JjigaeDTO{
         return jjigaeService.createJjigae(jjigaeDTO)
     }
-
+    //GET 모든 목록
     @GetMapping("/jjigaes")
     fun getJjigaes(): ResponseEntity<List<JjigaeDTO>> =
         ResponseEntity.ok(jjigaeService.getJjigaes())
-
+    //GET ID Object
     @GetMapping("/jjigae/{id}/")
     fun getJjigae(@PathVariable id:Int) =
         ResponseEntity.ok(jjigaeService.getJjigae(id))
-
+    //수정
     @PutMapping("/jjigae")
     fun updateJjigae(@RequestBody jjigaeDTO: JjigaeDTO) : JjigaeDTO{
         return jjigaeService.updateJjigae(jjigaeDTO)
     }
-
+    //DELETE BY ID
     @DeleteMapping("/jjigae/{id}/")
     fun deleteJjigae(@PathVariable id:Int) =
         ResponseEntity(jjigaeService.deleteJjigae(id), HttpStatus.NO_CONTENT)
+    //GET Random Object
+    @GetMapping("/random")
+    fun getRandomJjigae() =
+        ResponseEntity.ok(jjigaeService.getRandomJjigae())
 }

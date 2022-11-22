@@ -60,4 +60,20 @@ class JjigaeServiceImpl(
             throw JjigaeException("Jjigae with id $id is not present")
         jjigaeRepository.deleteById(id)
     }
+    //저장된 id List 리턴
+    fun makeRange(): List<Int> {
+        val jjigae = jjigaeRepository.getAllJjigae()
+        val range = mutableListOf<Int>()
+        for(idx in jjigae.indices){ //indices : for 문에서 위치를 나타내는 index 값을 나타날 때 indices 프로퍼티 사용
+            range.add(jjigae[idx].id)
+        }
+        println(range)
+        return range
+    }
+    //랜덤 찌개 정보 가져오기
+    override fun getRandomJjigae(): JjigaeDTO {
+        val range = makeRange()
+        val random = range.random()
+        return getJjigae(random)
+    }
 }

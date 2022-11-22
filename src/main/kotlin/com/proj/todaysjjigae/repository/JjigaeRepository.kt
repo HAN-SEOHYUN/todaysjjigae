@@ -7,5 +7,4 @@ import org.springframework.data.repository.CrudRepository
 interface JjigaeRepository : CrudRepository<Jjigae,Int> {
     @Query("SELECT m FROM Jjigae AS m")
     fun getAllJjigae():List<Jjigae>
-
 }
