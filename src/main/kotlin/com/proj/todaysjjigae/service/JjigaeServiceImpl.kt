@@ -5,6 +5,7 @@ import com.proj.todaysjjigae.mapper.JjigaeMapper
 import com.proj.todaysjjigae.repository.JjigaeRepository
 import com.proj.todaysjjigae.utils.exceptions.JjigaeException
 import org.springframework.stereotype.Service
+import kotlin.math.roundToInt
 
 @Service
 class JjigaeServiceImpl(
@@ -14,7 +15,6 @@ class JjigaeServiceImpl(
 
     //찌개 추가하기
     override fun createJjigae(jjigaeDTO: JjigaeDTO): JjigaeDTO {
-
         if(jjigaeDTO.id != -1)
             throw IllegalArgumentException("Id must be null")
 
@@ -65,9 +65,11 @@ class JjigaeServiceImpl(
         val jjigae = jjigaeRepository.getAllJjigae()
         val range = mutableListOf<Int>()
         for(idx in jjigae.indices){ //indices : for 문에서 위치를 나타내는 index 값을 나타날 때 indices 프로퍼티 사용
-            range.add(jjigae[idx].id)
+            val preference = jjigae[idx].preference.roundToInt() //반올림
+            for(length in 0..preference)
+                range.add(jjigae[idx].id)
         }
-        println(range)
+        println("range : "+range)
         return range
     }
     //랜덤 찌개 정보 가져오기
