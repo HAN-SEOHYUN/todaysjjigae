@@ -27,5 +27,5 @@
 <li>Resource : 컨트롤러</li>
 <br><br>
 
-<p>프로젝트 상세 및 POSTMAN 을 통한 API TEST 과정을 포스팅으로 정리했습니다🔽</p>
+<p><b>프로젝트 상세/b<> 및 <b>POSTMAN</b> 을 통한 <b>API TEST</b> 과정을 포스팅으로 정리했습니다🔽</p>
 <h2>https://feelfreetothink.tistory.com/147</h2>
